@@ -1,0 +1,10 @@
+docker build --tag tree:1.0.0 "${PWD}"
+
+docker images
+# Note the tree:1.0.0 image
+
+docker images --all
+# Note the intermediate images
+
+# Pass an argument to the containerized tree
+docker run --interactive --tty --rm --volume "${PWD}:/workdir" tree:1.0.0 my-dir

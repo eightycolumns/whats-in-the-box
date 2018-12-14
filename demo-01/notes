@@ -1,0 +1,14 @@
+# Start with a clean slate
+docker rm --force --volumes $(docker ps --all --quiet)
+docker rmi --force $(docker images --all --quiet)
+
+docker images
+# Note that there are no images
+
+docker run --interactive --tty --rm debian:9 echo 'Hello, world!'
+
+docker images
+# Note the debian:9 image
+# Subsequent runs will be faster
+
+docker run --interactive --tty --rm debian:9 echo 'Hello, world!'

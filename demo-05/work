@@ -1,0 +1,12 @@
+#!/bin/bash
+
+main() {
+  docker run \
+    --interactive \
+    --tty \
+    --rm \
+    --volume "${HOME}/workspace:/home/${USER}/workspace" \
+    eightycolumns/workspace:1.0.0
+}
+
+[ "${BASH_SOURCE[0]}" == "$0" ] && main "$@"

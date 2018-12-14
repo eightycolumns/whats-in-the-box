@@ -1,0 +1,9 @@
+docker build --tag wait:1.0.0 "${PWD}"
+
+# In a tmux horizontal split pane
+watch --interval 1 docker ps --all
+docker run --interactive --tty --rm wait:1.0.0 && echo 'Hello, world!'
+
+chmod 755 wait-and-then
+cp wait-and-then "${HOME}/bin"
+wait-and-then echo 'Hello, world!'

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+readonly IMAGE=wait:1.0.0
+
+main() {
+  image_exists || build_image
+  wait_and_then "$@"
+}
+
+image_exists() {
+  docker images | tail --lines +2 | awk '{print $1":"$2}' | grep --quiet "${IMAGE}"
+}
+
+build_image() {
+  docker build --tag "${IMAGE}" "${PWD}"
+}
+
+wait_and_then() {
+  docker run --interactive --tty --rm "${IMAGE}" && "$@"
+}
+
+[ "${BASH_SOURCE[0]}" == "$0" ] && main "$@"

@@ -1,0 +1,22 @@
+docker images
+# Note that there are no greeter images
+
+docker build --tag greeter:1.0.0 "${PWD}"
+docker images
+# Note the greeter:1.0.0 image
+
+docker ps --all
+# Note that there are no containers
+
+docker run --interactive --tty greeter:1.0.0
+docker ps --all
+# Note the greeter:1.0.0 container
+
+docker rm --force --volumes $(docker ps --all | grep greeter:1.0.0 | awk '{print $1}')
+docker ps --all
+# The greeter:1.0.0 container has been removed
+
+# This time add the --rm flag
+docker run --interactive --tty --rm greeter:1.0.0
+docker ps --all
+# Note that there are no containers
